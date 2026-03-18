@@ -10,8 +10,8 @@
     <style>
         /* Base Reset & Variables */
         :root {
-            --dark-blue: #0f172a; /* Deep Navy from reference */
-            --accent-blue: #3b82f6; /* Brighter blue for highlights */
+            --dark-blue: #0f172a;
+            --accent-blue: #3b82f6;
             --text-dark: #1e293b;
             --text-light: #64748b;
             --white: #ffffff;
@@ -32,11 +32,11 @@
         /* --- Split Layout Structure --- */
         .section-row {
             display: flex;
-            min-height: auto; /* Adjust based on content */
+            min-height: auto;
             border-bottom: 1px solid #e2e8f0;
         }
 
-        /* LEFT COLUMN (Dark Blue) */
+        /* LEFT COLUMN */
         .col-left {
             width: 35%;
             background-color: var(--dark-blue);
@@ -48,7 +48,7 @@
             position: relative;
         }
 
-        /* RIGHT COLUMN (White/Light) */
+        /* RIGHT COLUMN */
         .col-right {
             width: 65%;
             background-color: var(--white);
@@ -67,12 +67,12 @@
         }
 
         .small-tag {
-            color: #fbbf24; /* Amber accent like the 'hand' emoji in reference */
+            color: #fbbf24;
             font-weight: 600;
             font-size: 1.1em;
             margin-bottom: 10px;
             display: block;
-            font-family: 'Comforter Brush', cursive; /* Optional fancy font */
+            font-family: 'Comforter Brush', cursive;
         }
 
         h2 {
@@ -188,11 +188,14 @@
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
             transform: translateY(-5px);
         }
+        
+        /* UPDATED: Featured Projects Image Sizing */
         .project-img {
             width: 100%;
-            height: 500px; /* <--- UPDATED HEIGHT TO 500PX HERE */
-            object-fit: cover;
+            height: 350px; /* Reduced from 500px for a better aspect ratio */
+            object-fit: contain; /* Ensures the entire image fits without cropping */
             background: #f1f5f9;
+            padding: 10px; /* Optional: adds a little breathing room inside the gray background */
         }
         .project-body { padding: 25px; }
 
@@ -207,7 +210,15 @@
         }
         .carousel-slide { display: none; animation: fade 0.5s; }
         .carousel-slide.active { display: block; }
-        .slide-img { width: 100%; max-height: 300px; object-fit: contain; margin-bottom: 15px; }
+        
+        /* UPDATED: Carousel Image Sizing (Work Experience & SULAM) */
+        .slide-img { 
+            width: 100%; 
+            height: 300px; /* Set a fixed height */
+            object-fit: contain; /* Ensures the entire image fits without cropping */
+            margin-bottom: 15px; 
+            border-radius: 8px; /* Adds nice rounded corners to the image itself */
+        }
         
         .carousel-btn {
             position: absolute;
@@ -280,7 +291,7 @@
         <div class="col-left">
             <span class="small-tag">👋 Hello I'm Akmal</span>
             <h1 class="big-title">Networking Student<br>Based in<br>Malaysia</h1>
-            <p style="color: #94a3b8; margin-top: 10px;">Ready for Internship<br>March 2026</p>
+            <p style="color: #94a3b8; margin-top: 10px;">Ready for Work<br>July 2026</p>
         </div>
 
         <div class="col-right">
@@ -289,13 +300,22 @@
             </div>
             
             <h2>Junior Network & Security Specialist</h2>
-            <p>I am a passionate Computer Networks student seeking a practical training role. My goal is to apply my specialized knowledge in Network Infrastructure, Security, and IoT to solve real-world problems. I am eager to improve my communication and project management skills within a professional environment.</p>
+            <p>A Bachelor of Computer Science (Hons.) graduate from Universiti Teknologi MARA (UiTM) Shah
+            Alam with a strong technical background in network infrastructure and server maintenance. A
+            highly motivated individual with hands-on experience in freelance computer repair and system
+            development, skilled in troubleshooting hardware, managing network-layer security, and
+            implementing IoT solutions
+            </p>
             
             <ul class="contact-list">
                 <li><i class="fas fa-map-marker-alt"></i> Kajang, Selangor, Malaysia</li>
                 <li><i class="fas fa-envelope"></i> akmalzd@gmail.com</li>
                 <li><i class="fas fa-phone-alt"></i> (+60) 19-337 9671</li>
             </ul>
+
+            <a href="Resume Muhammad Akmal.pdf" target="_blank" class="pdf-btn" style="margin-top: 15px; width: fit-content;">
+                <i class="fas fa-download"></i> Download Resume
+            </a>
         </div>
     </section>
 
@@ -310,7 +330,7 @@
                 <div>
                     <h3>Bachelor of Computer Science (Hons.) Computer Networks</h3>
                     <span class="date">UiTM Shah Alam | March 2024 - Present</span>
-                    <p>Current CGPA: 3.26</p>
+                    <p>Current CGPA: 3.34</p>
                 </div>
             </div>
             <div class="edu-item">
@@ -601,4 +621,3 @@
     </script>
 </body>
 </html>
-
