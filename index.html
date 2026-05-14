@@ -4,55 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muhammad Akmal - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Base Reset & Variables */
+        /* Base Reset & Light Tech Variables */
         :root {
-            --dark-blue: #0f172a;
-            --accent-blue: #3b82f6;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --white: #ffffff;
-            --bg-gray: #f8fafc;
-            --transition: 0.3s ease;
+            --bg-main: #f0f4f8; /* Soft icy tech background */
+            --bg-card: rgba(255, 255, 255, 0.7); /* Light frosted glass */
+            --accent-blue: #0284c7; /* Deep cyber blue */
+            --accent-glow: rgba(2, 132, 199, 0.15); /* Soft blue shadow */
+            --text-main: #0f172a; /* Slate 900 for high contrast */
+            --text-muted: #475569; /* Slate 600 */
+            --border-color: rgba(15, 23, 42, 0.08); /* Subtle dark border */
+            --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--white);
-            color: var(--text-dark);
+            background-color: var(--bg-main);
+            color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* --- Split Layout Structure --- */
+        /* --- Network Canvas Background --- */
+        #network-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Scroll Reveal Animation Classes --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Split Layout Structure (Modern Sticky) --- */
         .section-row {
             display: flex;
-            min-height: auto;
-            border-bottom: 1px solid #e2e8f0;
+            max-width: 1200px;
+            margin: 0 auto 100px auto;
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .section-row:last-child {
+            border-bottom: none;
         }
 
-        /* LEFT COLUMN */
+        /* LEFT COLUMN - Sticky on Desktop */
         .col-left {
             width: 35%;
-            background-color: var(--dark-blue);
-            color: var(--white);
-            padding: 60px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
+            padding: 20px 40px 20px 0;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            z-index: 5;
         }
 
         /* RIGHT COLUMN */
         .col-right {
             width: 65%;
-            background-color: var(--white);
-            padding: 60px 50px;
+            padding: 20px 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -60,41 +86,55 @@
 
         /* --- Typography --- */
         .big-title {
-            font-size: 3em;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5em;
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.1;
             margin-bottom: 15px;
+            background: linear-gradient(to right, #0f172a, var(--text-muted));
+            -webkit-background-clip: text;
+            background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: -1px;
         }
 
         .small-tag {
-            color: #fbbf24;
+            color: var(--accent-blue);
             font-weight: 600;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-            display: block;
-            font-family: 'Comforter Brush', cursive;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            display: inline-block;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(2, 132, 199, 0.08);
+            padding: 5px 12px;
+            border-radius: 4px;
+            border: 1px solid rgba(2, 132, 199, 0.2);
         }
 
         h2 {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 2.2em;
-            color: var(--dark-blue);
+            color: var(--text-main);
             margin-bottom: 20px;
             font-weight: 700;
         }
 
         h3 {
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: 600;
             margin-bottom: 5px;
-            color: var(--text-dark);
+            color: var(--text-main);
         }
 
-        p { color: var(--text-light); margin-bottom: 20px; }
+        p { color: var(--text-muted); margin-bottom: 20px; }
         
         .date {
             color: var(--accent-blue);
-            font-weight: 600;
-            font-size: 0.9em;
+            font-weight: 500;
+            font-size: 0.85em;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 10px;
@@ -103,39 +143,121 @@
 
         /* --- Components --- */
 
-        /* Header Profile Image */
-        .profile-wrapper {
-            position: relative;
-            display: inline-block;
+        /* NEW: Glassmorphism ID Card (Replaces old profile wrapper) */
+        .about-card {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 25px;
+            gap: 30px;
+            box-shadow: 0 10px 30px rgba(2, 132, 199, 0.05);
+            backdrop-filter: blur(12px);
+            max-width: 100%;
             margin-bottom: 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
-        
-        .profile-img {
-            width: 280px;
-            height: 280px;
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background-image: radial-gradient(circle at top right, rgba(2, 132, 199, 0.05), transparent 40%);
+            z-index: 0;
+        }
+
+        .about-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 15px 40px var(--accent-glow);
+            transform: translateY(-5px);
+        }
+
+        .about-img-container {
+            flex-shrink: 0;
+            width: 260px;
+            height: 260px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            border: 2px solid rgba(2, 132, 199, 0.2);
+            background: #fff;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-radius: 30px 30px 100px 30px; 
-            box-shadow: 20px 20px 0px rgba(241, 245, 249, 1); 
-            border: 5px solid white;
+            transition: var(--transition);
+        }
+
+        .about-card:hover .about-img {
+            transform: scale(1.05);
+        }
+
+        .about-content {
+            flex-grow: 1;
+            z-index: 1;
+        }
+
+        .about-badge {
+            display: inline-block;
+            background: var(--accent-blue);
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8em;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .about-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8em;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
         /* Contact Info List */
         .contact-list {
             list-style: none;
-            margin-top: 20px;
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            position: relative;
+            z-index: 1;
         }
         .contact-list li {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 15px;
-            font-size: 1em;
-            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-size: 0.95em;
+            color: var(--text-main);
         }
+        .contact-list li:last-child { margin-bottom: 0; }
         .contact-list i {
             color: var(--accent-blue);
-            font-size: 1.2em;
+            font-size: 1.1em;
             width: 25px;
+            text-align: center;
         }
 
         /* Education Items */
@@ -144,48 +266,68 @@
             gap: 20px;
             margin-bottom: 30px;
             align-items: flex-start;
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+        .edu-item:hover {
+            border-color: var(--accent-blue);
+            transform: translateX(10px);
+            box-shadow: -5px 10px 20px var(--accent-glow);
         }
         .edu-logo {
             width: 60px;
             height: 60px;
             object-fit: contain;
-            background: #f8fafc;
-            padding: 5px;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
 
         /* Skills Grid */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 15px;
         }
         .skill-card {
-            background: #f8fafc;
-            padding: 15px;
+            background: var(--bg-card);
+            padding: 20px 10px;
             border-radius: 12px;
+            border: 1px solid var(--border-color);
             text-align: center;
+            backdrop-filter: blur(10px);
             transition: var(--transition);
+            cursor: crosshair;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
         }
         .skill-card:hover {
-            transform: translateY(-5px);
-            background: var(--dark-blue);
+            transform: translateY(-8px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 20px var(--accent-glow);
         }
-        .skill-card:hover .skill-name { color: white; }
-        .skill-icon { width: 40px; height: 40px; margin-bottom: 10px; object-fit: contain; }
-        .skill-name { font-size: 0.85em; font-weight: 600; color: var(--text-dark); display: block;}
+        .skill-icon { width: 40px; height: 40px; margin-bottom: 12px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05)); }
+        .skill-name { font-size: 0.8em; font-weight: 500; color: var(--text-main); display: block; letter-spacing: 0.5px;}
 
         /* Project Cards */
         .project-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
             overflow: hidden;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
             transition: var(--transition);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
         }
         .project-card:hover {
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 30px var(--accent-glow);
             transform: translateY(-5px);
         }
         
@@ -193,28 +335,36 @@
             width: 100%;
             height: 350px; 
             object-fit: contain; 
-            background: #f1f5f9;
-            padding: 10px; 
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px;
         }
-        .project-body { padding: 25px; }
+        
+        .project-body { padding: 30px; }
 
         /* Carousel */
         .carousel-container {
             position: relative;
-            background: #f8fafc;
-            border-radius: 15px;
-            padding: 30px 30px 20px 30px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
             text-align: center;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
         }
-        .carousel-slide { display: none; animation: fade 0.5s; }
+        .carousel-slide { 
+            display: none; 
+            animation: techFade 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
         .carousel-slide.active { display: block; }
         
         .slide-img { 
             width: 100%; 
             height: 300px; 
             object-fit: contain; 
-            margin-bottom: 15px; 
+            margin-bottom: 20px; 
             border-radius: 8px; 
         }
         
@@ -222,87 +372,138 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background: white;
-            border: 1px solid #e2e8f0;
-            color: var(--dark-blue);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
             cursor: pointer;
             font-size: 1.2em;
             transition: var(--transition);
             z-index: 10;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .carousel-btn:hover { background: var(--dark-blue); color: white; }
-        .prev-btn { left: 10px; }
-        .next-btn { right: 10px; }
+        .carousel-btn:hover { 
+            background: var(--accent-blue); 
+            color: #ffffff; 
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+        .prev-btn { left: 15px; }
+        .next-btn { right: 15px; }
 
         .slide-counter {
             margin-top: 15px;
-            font-size: 0.9em;
-            font-weight: 600;
-            color: var(--text-light);
-            letter-spacing: 1px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85em;
+            font-weight: 700;
+            color: var(--accent-blue);
+            letter-spacing: 2px;
         }
 
-        /* PDF Button */
+        /* Tech Buttons */
         .pdf-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 5px;
-            padding: 10px 20px;
-            background-color: var(--accent-blue);
-            color: white;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 12px 24px;
+            background: transparent;
+            color: var(--accent-blue);
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 4px;
             font-size: 0.9em;
-            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--accent-blue);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .pdf-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: var(--accent-blue);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        .pdf-btn:hover::before {
+            left: 0;
         }
         .pdf-btn:hover {
-            background-color: var(--dark-blue);
-            transform: translateY(-2px);
+            color: #ffffff;
+            box-shadow: 0 5px 15px var(--accent-glow);
         }
 
-        /* SULAM Extracurricular Specifics */
-        .sulam-wrapper { margin-bottom: 40px; }
-        .sulam-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        /* SULAM Specifics */
+        .sulam-wrapper { 
+            margin-bottom: 40px; 
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+        .sulam-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
         .sulam-logo { height: 40px; }
 
         /* Mobile Responsiveness */
         @media (max-width: 900px) {
-            .section-row { flex-direction: column; }
-            .col-left, .col-right { width: 100%; padding: 40px 20px; }
-            .col-left { padding-bottom: 20px; }
+            .section-row { flex-direction: column; padding: 20px; gap: 20px; margin: 40px auto; }
+            .col-left, .col-right { width: 100%; padding: 0; }
+            .col-left { position: relative; top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 30px;}
             .big-title { font-size: 2.5em; }
-            .profile-img { width: 100%; max-width: 300px; }
+            
+            .about-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .about-img-container {
+                width: 100%;
+                max-width: 280px;
+                height: 280px;
+            }
+            .contact-list li {
+                justify-content: center;
+            }
         }
 
-        @keyframes fade { from {opacity: 0.6} to {opacity: 1} }
+        /* Custom Tech Animation for Carousels */
+        @keyframes techFade { 
+            0% { opacity: 0; transform: scale(0.95) translateY(10px); filter: blur(4px); } 
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); } 
+        }
     </style>
 </head>
 <body>
+    
+    <canvas id="network-canvas"></canvas>
 
-    <section class="section-row">
+    <section class="section-row reveal">
         <div class="col-left">
-            <span class="small-tag">👋 Hello I'm Akmal</span>
+            <span class="small-tag"><i class="fas fa-terminal"></i> Hello, I'm Akmal</span>
             <h1 class="big-title">Networking Student<br>Based in<br>Malaysia</h1>
-            <p style="color: #94a3b8; margin-top: 10px;">Ready for Work<br>July 2026</p>
+            <p style="color: var(--accent-blue); font-family: 'Space Grotesk', sans-serif; font-size: 0.9em; letter-spacing: 1px;">STATUS: READY FOR WORK (JULY 2026)</p>
         </div>
 
         <div class="col-right">
-            <div class="profile-wrapper">
-                <img src="profile-picture.jpg" alt="Muhammad Akmal" class="profile-img">
+            <div class="about-card">
+                <div class="about-img-container">
+                    <img src="profile-picture.jpg" alt="Muhammad Akmal" class="about-img">
+                </div>
+                <div class="about-content">
+                    <span class="about-badge">System Ready</span>
+                    <h3>Muhammad Akmal bin Mohd Zaid</h3>
+                    <p>A final-year Bachelor of Computer Science (Hons.) student at UiTM Shah Alam specializing in Computer Networking. I bridge the gap between hardware infrastructure and network security. With hands-on experience as a freelance computer repair technician and expertise in Cisco administration, packet tracing, and deep-level hardware troubleshooting, I build and maintain systems that are secure, optimized, and reliable.</p>
+                </div>
             </div>
-            
-            <h2>Junior Network & Security Specialist</h2>
-            <p>A Bachelor of Computer Science (Hons.) Computer Networks graduate from Universiti Teknologi MARA (UiTM) Shah
-            Alam with a strong technical background in network infrastructure and server maintenance. A
-            highly motivated individual with hands-on experience in freelance computer repair and system
-            development, skilled in troubleshooting hardware, managing network-layer security, and
-            implementing IoT solutions
-            </p>
             
             <ul class="contact-list">
                 <li><i class="fas fa-map-marker-alt"></i> Kajang, Selangor, Malaysia</li>
@@ -310,15 +511,15 @@
                 <li><i class="fas fa-phone-alt"></i> (+60) 19-337 9671</li>
             </ul>
 
-            <a href="RESUME MUHAMMAD AKMAL BIN MOHD ZAID.pdf" target="_blank" rel="noopener noreferrer" class="pdf-btn" style="margin-top: 15px; width: fit-content;">
-                <i class="fas fa-download"></i> Download Resume
+            <a href="RESUME MUHAMMAD AKMAL BIN MOHD ZAID.pdf" target="_blank" rel="noopener noreferrer" class="pdf-btn" style="margin-top: 20px; width: fit-content;">
+                <i class="fas fa-download"></i> Initialize Resume
             </a>
         </div>
     </section>
 
-    <section class="section-row">
+    <section class="section-row reveal">
         <div class="col-left">
-            <span class="small-tag">📚 Background</span>
+            <span class="small-tag"><i class="fas fa-database"></i> Background</span>
             <h1 class="big-title">My Academic<br>Journey</h1>
         </div>
         <div class="col-right">
@@ -349,9 +550,9 @@
         </div>
     </section>
 
-    <section class="section-row">
+    <section class="section-row reveal">
         <div class="col-left">
-            <span class="small-tag">🛠️ Arsenal</span>
+            <span class="small-tag"><i class="fas fa-microchip"></i> Arsenal</span>
             <h1 class="big-title">Technical<br>Skills</h1>
         </div>
         <div class="col-right">
@@ -398,17 +599,17 @@
                 </div>
                  <div class="skill-card">
                     <img src="windows.png" alt="windows" class="skill-icon" loading="lazy">
-                    <span class="skill-name">Windows Devices</span>
+                    <span class="skill-name">Windows</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-row">
+    <section class="section-row reveal">
         <div class="col-left">
-            <span class="small-tag">🏆 Verified</span>
+            <span class="small-tag"><i class="fas fa-shield-alt"></i> Verified</span>
             <h1 class="big-title">Professional<br>Certificates</h1>
-            <p style="color: #94a3b8">Cisco & Google Certified</p>
+            <p style="color: var(--text-muted)">Cisco & Google Certified</p>
         </div>
         <div class="col-right">
             <div class="carousel-container multi-carousel">
@@ -437,7 +638,6 @@
                     <h3>Introduction to Cybersecurity</h3>
                     <span class="date">Cisco (Jun 2025)</span>
                 </div>
-                 
                 <div class="carousel-slide">
                     <img src="cisco-ai.png" alt="Cisco IoT" class="slide-img" loading="lazy">
                     <h3>Introduction to Modern AI</h3>
@@ -466,18 +666,16 @@
         </div>
     </section>
 
-    <section class="section-row">
+    <section class="section-row reveal">
         <div class="col-left">
-            <span class="small-tag">💼 History</span>
+            <span class="small-tag"><i class="fas fa-code-branch"></i> History</span>
             <h1 class="big-title">Work<br>Experience</h1>
         </div>
         <div class="col-right">
             
             <div style="margin-bottom: 50px;">
-
                 <div class="carousel-container multi-carousel" style="width: 100%; margin-top: 20px;">
                     <div class="carousel-slide active"><img src="Pro.jpg" alt="Pro Office Work 1" class="slide-img" loading="lazy"></div>
-                    
                     
                     <button class="carousel-btn prev-btn" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
                     <button class="carousel-btn next-btn" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
@@ -486,27 +684,24 @@
                 </div>
                 
                 <div style="display: flex; gap: 20px; align-items: flex-start; width: 100%; margin-top: 30px;">
-                    <div class="edu-logo" style="display:flex;align-items:center;justify-content:center;background:#0f172a;color:white;">
+                    <div class="edu-logo" style="display:flex;align-items:center;justify-content:center;background:var(--accent-glow);color:var(--accent-blue); border-color:var(--accent-blue);">
                         <i class="fas fa-desktop fa-lg"></i>
                     </div>
                     <div>
                         <h3>Technical Support Intern</h3>
                         <span class="date">Pro Office Technology | Mar 2026 - Jul 2026</span>
-                        <ul style="margin-top:10px; padding-left:20px; color:#64748b; font-size:0.95em;">
-                            <li>Resolved technical issues related to systems, applications, and network connectivity.</li>
-                            <li>Provided first-level IT support to internal and external users.</li>
-                            <li>Supported the installation and configuration of IT equipment such as computers, operating systems, printers, and network devices.</li>
-                            <li>Troubleshot hardware and software issues and escalated complex problems to senior technical staff.</li>
+                        <ul style="margin-top:10px; padding-left:20px; color:var(--text-muted); font-size:0.95em;">
+                            <li style="margin-bottom: 8px;">Resolved technical issues related to systems, applications, and network connectivity.</li>
+                            <li style="margin-bottom: 8px;">Provided first-level IT support to internal and external users.</li>
+                            <li style="margin-bottom: 8px;">Supported the installation and configuration of IT equipment such as computers, operating systems, printers, and network devices.</li>
+                            <li style="margin-bottom: 8px;">Troubleshot hardware and software issues and escalated complex problems to senior technical staff.</li>
                             <li>Assisted in maintaining proper documentation of technical issues and organizing IT assets and equipment inventory.</li>
                         </ul>
                     </div>
                 </div>
-                
-                
             </div>
 
             <div>
-
                 <div class="carousel-container multi-carousel" style="width: 100%; margin-top: 20px;">
                     <div class="carousel-slide active"><img src="intern-1.jpg" alt="Internship photo 1" class="slide-img" loading="lazy"></div>
                     <div class="carousel-slide"><img src="intern-2.jpg" alt="Internship photo 2" class="slide-img" loading="lazy"></div>
@@ -521,31 +716,29 @@
                 </div>
 
                 <div style="display: flex; gap: 20px; align-items: flex-start; width: 100%; margin-top: 30px;">
-                    <div class="edu-logo" style="display:flex;align-items:center;justify-content:center;background:#0f172a;color:white;">
+                    <div class="edu-logo" style="display:flex;align-items:center;justify-content:center;background:var(--accent-glow);color:var(--accent-blue); border-color:var(--accent-blue);">
                         <i class="fas fa-train fa-lg"></i>
                     </div>
                     <div>
                         <h3>IT Support Specialist Intern</h3>
                         <span class="date">Express Rail Link Sdn Bhd | Sept 2023 - Mar 2024</span>
-                        <ul style="margin-top:10px; padding-left:20px; color:#64748b; font-size:0.95em;">
-                            <li>Maintained and Administered servers across multiple stations for high availability.</li>
-                            <li>Managed CCTV installation and maintenance for physical security.</li>
-                            <li>Provided technical support to staff and on-site event support.</li>
-                            <li>Developed an inventory management website using PHP & MySQL.</li>
-                            <li>Conducted IT audits on departmental systems to ensure compliance</li>
+                        <ul style="margin-top:10px; padding-left:20px; color:var(--text-muted); font-size:0.95em;">
+                            <li style="margin-bottom: 8px;">Maintained and Administered servers across multiple stations for high availability.</li>
+                            <li style="margin-bottom: 8px;">Managed CCTV installation and maintenance for physical security.</li>
+                            <li style="margin-bottom: 8px;">Provided technical support to staff and on-site event support.</li>
+                            <li style="margin-bottom: 8px;">Developed an inventory management website using PHP & MySQL.</li>
+                            <li>Conducted IT audits on departmental systems to ensure compliance.</li>
                         </ul>
                     </div>
                 </div>
-                
-                
             </div>
             
         </div>
     </section>
 
-    <section class="section-row">
+    <section class="section-row reveal">
         <div class="col-left">
-            <span class="small-tag">🚀 Innovation</span>
+            <span class="small-tag"><i class="fas fa-rocket"></i> Innovation</span>
             <h1 class="big-title">Featured<br>Projects</h1>
         </div>
         <div class="col-right">
@@ -554,10 +747,10 @@
                 <div class="multi-carousel" style="position: relative;">
                     <div class="carousel-slide active"><img src="fyp-1.png" alt="FYP Photo 1" class="project-img" loading="lazy"></div>
         
-                    <button class="carousel-btn prev-btn" style="width: 32px; height: 32px; font-size: 0.9em;" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-btn next-btn" style="width: 32px; height: 32px; font-size: 0.9em;" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-btn prev-btn" style="width: 32px; height: 32px; font-size: 0.9em; background: rgba(255,255,255,0.9);" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn next-btn" style="width: 32px; height: 32px; font-size: 0.9em; background: rgba(255,255,255,0.9);" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
                     
-                    <div class="slide-counter" style="position: absolute; bottom: 15px; right: 15px; margin: 0; background: rgba(255, 255, 255, 0.9); padding: 3px 12px; border-radius: 20px; font-size: 0.8em; color: var(--dark-blue);"></div>
+                    <div class="slide-counter" style="position: absolute; bottom: 15px; right: 15px; margin: 0; background: var(--bg-card); border: 1px solid var(--accent-blue); padding: 3px 12px; border-radius: 4px; font-size: 0.8em;"></div>
                 </div>
 
                 <div class="project-body">
@@ -575,10 +768,10 @@
                     <div class="carousel-slide active"><img src="locker-1.png" alt="IoT Locker 1" class="project-img" loading="lazy"></div>
                     <div class="carousel-slide"><img src="locker-2.png" alt="IoT Locker 2" class="project-img" loading="lazy"></div>
                     
-                    <button class="carousel-btn prev-btn" style="width: 32px; height: 32px; font-size: 0.9em;" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-btn next-btn" style="width: 32px; height: 32px; font-size: 0.9em;" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+                    <button class="carousel-btn prev-btn" style="width: 32px; height: 32px; font-size: 0.9em; background: rgba(255,255,255,0.9);" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-btn next-btn" style="width: 32px; height: 32px; font-size: 0.9em; background: rgba(255,255,255,0.9);" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
                     
-                    <div class="slide-counter" style="position: absolute; bottom: 15px; right: 15px; margin: 0; background: rgba(255, 255, 255, 0.9); padding: 3px 12px; border-radius: 20px; font-size: 0.8em; color: var(--dark-blue);"></div>
+                    <div class="slide-counter" style="position: absolute; bottom: 15px; right: 15px; margin: 0; background: var(--bg-card); border: 1px solid var(--accent-blue); padding: 3px 12px; border-radius: 4px; font-size: 0.8em;"></div>
                 </div>
 
                 <div class="project-body">
@@ -590,9 +783,9 @@
         </div>
     </section>
 
-    <section class="section-row" style="border-bottom: none;">
+    <section class="section-row reveal">
         <div class="col-left">
-            <span class="small-tag">❤️ Volunteer</span>
+            <span class="small-tag"><i class="fas fa-heart"></i> Volunteer</span>
             <h1 class="big-title">SULAM<br>Activities</h1>
         </div>
         <div class="col-right">
@@ -603,7 +796,7 @@
 
             <div class="sulam-wrapper">
                 <h3>Rumah Kanak-Kanak Toh Puan Hajah Norkiah</h3>
-                <span class="date" style="font-size: 0.8em; color: #94a3b8;">Kuching, Sarawak</span>
+                <span class="date" style="font-size: 0.8em;">Kuching, Sarawak</span>
                 <div class="carousel-container multi-carousel" style="margin-top:15px;">
                     <div class="carousel-slide active"><img src="sulam-kuching-1.jpg" class="slide-img" loading="lazy"></div>
                     <div class="carousel-slide"><img src="sulam-kuching-2.jpg" class="slide-img" loading="lazy"></div>
@@ -617,7 +810,7 @@
 
             <div class="sulam-wrapper">
                 <h3>Kampung Budiman</h3>
-                <span class="date" style="font-size: 0.8em; color: #94a3b8;">Klang, Selangor</span>
+                <span class="date" style="font-size: 0.8em;">Klang, Selangor</span>
                 <div class="carousel-container multi-carousel" style="margin-top:15px;">
                     <div class="carousel-slide active"><img src="sulam-klang-1.jpg" class="slide-img" loading="lazy"></div>
                     <div class="carousel-slide"><img src="sulam-klang-2.jpg" class="slide-img" loading="lazy"></div>
@@ -627,13 +820,14 @@
                     
                     <div class="slide-counter"></div>
                 </div>
-                <p style="margin-top:15px;">Spearheaded sponsorship management, hosted a Roblox Tournament, and conducted a talk on "AI Dan ChatGPT Bantu, Bukan Ganti Manusia" .</p>
+                <p style="margin-top:15px;">Spearheaded sponsorship management, hosted a Roblox Tournament, and conducted a talk on "AI Dan ChatGPT Bantu, Bukan Ganti Manusia".</p>
             </div>
         </div>
     </section>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Carousel Logic ---
             const carousels = document.querySelectorAll('.multi-carousel');
             
             carousels.forEach(carousel => {
@@ -649,19 +843,110 @@
                     else currentIndex = index;
                     
                     slides.forEach(slide => slide.classList.remove('active'));
-                    slides[currentIndex].classList.add('active');
+                    
+                    // Small delay to re-trigger the CSS animation
+                    setTimeout(() => {
+                        slides[currentIndex].classList.add('active');
+                    }, 10);
                     
                     if (counter) {
-                        counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+                        counter.textContent = `[ ${currentIndex + 1} / ${slides.length} ]`;
                     }
                 }
                 
                 if (prevBtn) prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
                 if (nextBtn) nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
 
-                if (counter) {
-                    counter.textContent = `1 / ${slides.length}`;
+                if (counter && slides.length > 0) {
+                    counter.textContent = `[ 1 / ${slides.length} ]`;
                 }
+            });
+
+            // --- Scroll Reveal Animation ---
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+
+            // --- Animated Network Nodes Background ---
+            const canvas = document.getElementById('network-canvas');
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+            
+            let particles = [];
+            const particleCount = window.innerWidth < 768 ? 30 : 70; 
+            
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.vy = (Math.random() - 0.5) * 0.8;
+                    this.radius = Math.random() * 2 + 1;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    // Bounce off edges
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(2, 132, 199, 0.4)'; 
+                    ctx.fill();
+                }
+            }
+            
+            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+            
+            function animateNetwork() {
+                ctx.clearRect(0, 0, width, height);
+                
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                
+                // Draw connecting network lines
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < 130) {
+                            ctx.beginPath();
+                            // Line opacity fades as they get further apart
+                            ctx.strokeStyle = `rgba(2, 132, 199, ${0.15 - dist/900})`;
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animateNetwork);
+            }
+            animateNetwork();
+            
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
             });
         });
     </script>
